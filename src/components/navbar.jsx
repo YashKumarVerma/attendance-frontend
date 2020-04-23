@@ -1,24 +1,58 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
-const navBar = ({ isLoggedIn }) => (
-  <nav className="navbar navbar-expand-lg navbar-light bg-light">
-    <a className="navbar-brand" href="/">
-      Attendance
-    </a>
-    <div className="collapse navbar-collapse" id="navbarText">
-      <ul className="navbar-nav mr-auto"></ul>
-      <span className="navbar-text pull-right">
-        {isLoggedIn ? (
-          <Link to="/logout">
-            <button type="button" className="btn btn-outline-danger">
+class navBar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { redirect: false };
+  }
+
+  handleLogout = () => {
+    console.log("Logging you out");
+    this.setState({ redirect: true });
+  };
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
+    }
+  };
+
+  render() {
+    return (
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        {this.renderRedirect()}
+        <Link to="/">
+          <div className="navbar-brand">Attendance App</div>
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarExpansion"
+          aria-controls="navbarExpansion"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarExpansion">
+          <ul className="navbar-nav mr-auto"></ul>
+          <form className="form-inline my-2 my-md-0">
+            <button
+              className="btn btn-outline-danger"
+              type="button"
+              onClick={this.handleLogout}
+            >
               Logout
             </button>
-          </Link>
-        ) : null}
-      </span>
-    </div>
-  </nav>
-);
+          </form>
+        </div>
+      </nav>
+    );
+  }
+}
 
 export default navBar;
