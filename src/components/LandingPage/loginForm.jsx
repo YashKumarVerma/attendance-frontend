@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Redirect } from "react-router-dom";
 import InputElement from "../InputElement";
 
 class LoginForm extends React.Component {
@@ -9,6 +9,7 @@ class LoginForm extends React.Component {
     this.state = {
       email: "",
       password: "",
+      redirect: false,
     };
   }
 
@@ -20,12 +21,19 @@ class LoginForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state);
-    this.setState({ email: "", password: "" });
+    this.setState({ redirect: true });
+  };
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/dashboard" />;
+    }
   };
 
   render() {
     return (
       <div className="row">
+        {this.renderRedirect()}
         <div className="col-md-3 col-sm-1"></div>
         <div className="col-md-6 col-sm-10">
           <form onSubmit={this.handleSubmit}>
