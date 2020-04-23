@@ -8,17 +8,29 @@ class navBar extends React.Component {
     this.state = { redirect: false };
   }
 
+  //   function to execure logout mechanism
   handleLogout = () => {
+    //   shout out to the world
     console.log("Logging you out");
+
+    // empty localstorage
+    localStorage.removeItem("username");
+    localStorage.removeItem("fullname");
+    localStorage.removeItem("profile");
+    localStorage.removeItem("token");
+
+    // now redirect to dashboard
     this.setState({ redirect: true });
   };
 
+  //   function to handle redirect to login screen
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to="/" />;
     }
   };
 
+  //   render function to display components
   render() {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
