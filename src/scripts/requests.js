@@ -1,14 +1,18 @@
 import axios from "axios";
-import config from "../config";
+import config from "./config";
 
 class Requests {
   static getUserEvents() {
     return new Promise((resolve, reject) => {
       axios
-        .get(`${config.host}/events/list`)
+        .get(`${config.host}/event/list`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((resp) => {
           // save the items in local storage
-          resolve(resp.payload);
+          resolve(resp.data.payload);
         })
         .catch((error) => {
           reject(error.response.data);
