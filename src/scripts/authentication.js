@@ -1,20 +1,13 @@
 import axios from "axios";
+import config from "./config";
 
 class Authentication {
-  // one function to store configurations of all
-  static GetConfig() {
-    return {
-      host: "http://localhost:3000",
-    };
-  }
-
   // this function is used to authenticate user from server
   static LoginHandler(param) {
-    const { host } = Authentication.GetConfig();
     const { username, password } = param;
     return new Promise((resolve, reject) => {
       axios
-        .post(`${host}/user/login`, { username, password })
+        .post(`${config.host}/user/login`, { username, password })
         .then((resp) => {
           // save the items in local storage
           localStorage.setItem("username", resp.data.payload.username);
@@ -31,4 +24,4 @@ class Authentication {
   }
 }
 
-export default Authentication.LoginHandler;
+export const LoginHandler = Authentication.LoginHandler;

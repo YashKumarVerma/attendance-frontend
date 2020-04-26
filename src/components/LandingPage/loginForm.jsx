@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import InputElement from "../InputElement";
-import LoginHandler from "../../scripts/authentication/login";
+import { LoginHandler } from "../../scripts/authentication";
 
 class LoginForm extends React.Component {
   constructor() {
