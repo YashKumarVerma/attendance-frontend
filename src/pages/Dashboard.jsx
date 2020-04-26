@@ -4,7 +4,8 @@ import React from "react";
 import NavBar from "../components/navbar";
 import EventListItem from "../components/Dashboard/eventListItem";
 import EventDetailsCard from "../components/Dashboard/eventDetails";
-import CreateEventButton from "../components/Dashboard/createEvent";
+import EventListCard from "../components/Dashboard/eventList";
+import CreateEventButton from "../components/Dashboard/eventDetailsCreateButton";
 
 // loading scripts
 import { getUserEvents } from "../scripts/requests";
@@ -66,29 +67,12 @@ class Dashboard extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4 col-sm-12">
-              <div className="card  bg-light">
-                <div className="card-body">
-                  <h5 className="card-title">Events</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    listing all events created by you
-                  </h6>
-                  {this.state.userEvents !== undefined ? (
-                    <small>click to know more</small>
-                  ) : null}
-                  <ul className="list-group">
-                    {this.state.userEvents.map((userEvent) => (
-                      <EventListItem
-                        event={userEvent}
-                        makeEventActive={this.makeEventActive}
-                        key={userEvent._id}
-                      />
-                    ))}
-                  </ul>
-                  <CreateEventButton newEventUpdater={this.newEventUpdater}>
-                    Create New Event
-                  </CreateEventButton>
-                </div>
-              </div>
+              {/** Show the list of all events */}
+              <EventListCard
+                userEvents={this.state.userEvents}
+                newEventUpdater={this.newEventUpdater}
+                makeEventActive={this.makeEventActive}
+              />
 
               <br />
 
