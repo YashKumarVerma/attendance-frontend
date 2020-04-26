@@ -34,9 +34,16 @@ class CreateEventModal extends React.Component {
           eventName: this.state.eventName,
           slug: this.state.eventSlug,
           admin: localStorage.getItem("username"),
-          description: this.state.description,
+          description: this.state.eventDescription,
         });
         console.log("New Event Created");
+
+        // reset state
+        this.setState({
+          eventName: "",
+          eventSlug: "",
+          eventDescription: "",
+        });
 
         // close the modal
         window.$("#createEventModal").modal("hide");

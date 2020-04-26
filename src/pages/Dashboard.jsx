@@ -60,6 +60,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <NavBar isLoggedIn={true} />
@@ -72,7 +73,9 @@ class Dashboard extends React.Component {
                   <h6 className="card-subtitle mb-2 text-muted">
                     listing all events created by you
                   </h6>
-                  <small>click to know more</small>
+                  {this.state.userEvents !== undefined ? (
+                    <small>click to know more</small>
+                  ) : null}
                   <p className="card-text">
                     <ul className="list-group">
                       {this.state.userEvents.map((userEvent) => (

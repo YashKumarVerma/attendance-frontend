@@ -18,6 +18,7 @@ class EventDetails extends React.Component {
 
   render() {
     const { eventName, slug, description, picture } = this.props.activeEvent;
+    console.log(this.props.activeEvent);
     return (
       <div className="card  bg-light">
         <div className="card-body">
