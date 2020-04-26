@@ -56,11 +56,10 @@ class Dashboard extends React.Component {
   //   function to make event active when clicked upon
   makeEventActive = (event) => {
     this.setState({ activeEvent: event });
-    console.log(event.eventName, "is active now");
+    console.log(event.slug, "is active now");
   };
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <NavBar isLoggedIn={true} />
@@ -76,16 +75,15 @@ class Dashboard extends React.Component {
                   {this.state.userEvents !== undefined ? (
                     <small>click to know more</small>
                   ) : null}
-                  <p className="card-text">
-                    <ul className="list-group">
-                      {this.state.userEvents.map((userEvent) => (
-                        <EventListItem
-                          event={userEvent}
-                          makeEventActive={this.makeEventActive}
-                        />
-                      ))}
-                    </ul>
-                  </p>
+                  <ul className="list-group">
+                    {this.state.userEvents.map((userEvent) => (
+                      <EventListItem
+                        event={userEvent}
+                        makeEventActive={this.makeEventActive}
+                        key={userEvent._id}
+                      />
+                    ))}
+                  </ul>
                   <CreateEventButton newEventUpdater={this.newEventUpdater}>
                     Create New Event
                   </CreateEventButton>

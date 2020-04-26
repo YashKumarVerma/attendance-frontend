@@ -3,7 +3,6 @@ import "./dashboard.scss";
 
 class EventListItem extends React.Component {
   onClickHandler = () => {
-    console.log(this.props.event);
     this.props.makeEventActive(this.props.event);
   };
 
