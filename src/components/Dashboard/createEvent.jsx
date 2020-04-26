@@ -13,8 +13,6 @@ class CreateEventModal extends React.Component {
       error: false,
       errorMessage: "",
     };
-
-    console.log(this.props);
   }
 
   //   function to update changes to state
@@ -39,6 +37,8 @@ class CreateEventModal extends React.Component {
           description: this.state.description,
         });
         console.log("New Event Created");
+
+        // close the modal
         window.$("#createEventModal").modal("hide");
       })
       .catch((error) => {

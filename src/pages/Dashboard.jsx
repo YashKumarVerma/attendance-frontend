@@ -3,20 +3,29 @@ import React from "react";
 // importing components
 import NavBar from "../components/navbar";
 import EventListItem from "../components/Dashboard/eventListItem";
+import EventDetailsCard from "../components/Dashboard/eventDetails";
 import CreateEventButton from "../components/Dashboard/createEvent";
-// importing scripts
+
+// loading scripts
 import { getUserEvents } from "../scripts/requests";
 
 class Dashboard extends React.Component {
   constructor() {
     super();
+
+    // store the list of events in state
     this.state = {
       userEvents: [],
+      activeEvent: undefined,
+      activeSession: undefined,
     };
 
+    // bind eventUpdater to current state instance
     this.newEventUpdater = this.newEventUpdater.bind(this);
+    this.deleteElement = this.deleteElement.bind(this);
   }
 
+  // load list of all events when component loads
   componentDidMount() {
     getUserEvents()
       .then((eventArray) => this.setState({ userEvents: [...eventArray] }))
@@ -25,10 +34,29 @@ class Dashboard extends React.Component {
 
   //   handler to append newly created element to current app state
   newEventUpdater = (event) => {
-    //   append the element to array and return new item
     this.setState({ userEvents: this.state.userEvents.concat(event) });
-    console.log("state updated");
-    console.log(event, this.state);
+  };
+
+  // handler to delete element from app state
+  deleteElement = (elementSlugToBeDeleted) => {
+    let newEvents = [];
+    for (let i = 0; i < this.state.userEvents.length; i += 1) {
+      if (this.state.userEvents[i].slug !== elementSlugToBeDeleted) {
+        newEvents.push(this.state.userEvents[i]);
+      }
+    }
+
+    this.setState({
+      activeEvent: undefined,
+      activeSession: undefined,
+      userEvents: newEvents,
+    });
+  };
+
+  //   function to make event active when clicked upon
+  makeEventActive = (event) => {
+    this.setState({ activeEvent: event });
+    console.log(event.eventName, "is active now");
   };
 
   render() {
@@ -38,16 +66,20 @@ class Dashboard extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4 col-sm-12">
-              <div className="card">
+              <div className="card  bg-light">
                 <div className="card-body">
-                  <h5 className="card-title">User Events</h5>
+                  <h5 className="card-title">Events</h5>
                   <h6 className="card-subtitle mb-2 text-muted">
                     listing all events created by you
                   </h6>
+                  <small>click to know more</small>
                   <p className="card-text">
                     <ul className="list-group">
                       {this.state.userEvents.map((userEvent) => (
-                        <EventListItem event={userEvent} />
+                        <EventListItem
+                          event={userEvent}
+                          makeEventActive={this.makeEventActive}
+                        />
                       ))}
                     </ul>
                   </p>
@@ -56,40 +88,57 @@ class Dashboard extends React.Component {
                   </CreateEventButton>
                 </div>
               </div>
+
+              <br />
+
+              {/**	Show the event details only if user clicks on any event  */}
+              {this.state.activeEvent ? (
+                <EventDetailsCard
+                  activeEvent={this.state.activeEvent}
+                  deleteElement={this.deleteElement}
+                />
+              ) : null}
             </div>
+
             <div className="col-md-4 col-sm-12">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Event Sessions</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    listing all sessions in the current event
-                  </h6>
-                  <p className="card-text"></p>
-                  <button
-                    href="#"
-                    className="card-link btn btn-outline-primary"
-                  >
-                    Card link
-                  </button>
+              {/**	Show the sessions area only if user clicks on any event  */}
+              {this.state.activeEvent ? (
+                <div className="card ">
+                  <div className="card-body">
+                    <h5 className="card-title">Event Sessions</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">
+                      in {this.state.activeEvent.eventName}
+                    </h6>
+                    <p className="card-text"></p>
+                    <button
+                      href="#"
+                      className="card-link btn btn-outline-primary"
+                    >
+                      F
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
+
             <div className="col-md-4 col-sm-12">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Session Details</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    listing all events created by you
-                  </h6>
-                  <p className="card-text"></p>
-                  <button
-                    href="#"
-                    className="card-link btn btn-outline-primary"
-                  >
-                    Card link
-                  </button>
+              {this.state.activeSession ? (
+                <div className="card">
+                  <div className="card-body">
+                    <h5 className="card-title">Event Sessions</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">
+                      listing all sessions in the current event
+                    </h6>
+                    <p className="card-text"></p>
+                    <button
+                      href="#"
+                      className="card-link btn btn-outline-primary"
+                    >
+                      Card link
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </div>
         </div>
