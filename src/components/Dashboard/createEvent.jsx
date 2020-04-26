@@ -58,7 +58,7 @@ class CreateEventModal extends React.Component {
     return (
       <div>
         <button
-          className="card-link btn btn-outline-primary"
+          className="card-link btn btn-outline-primary create-new-event-button"
           data-target="#createEventModal"
           data-toggle="modal"
         >
@@ -123,7 +123,7 @@ class CreateEventModal extends React.Component {
                     Close
                   </button>
                   <button type="submit" className="btn btn-primary">
-                    Create New Event
+                    Save Event
                   </button>
                 </div>
               </div>
