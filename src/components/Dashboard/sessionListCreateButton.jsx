@@ -12,7 +12,6 @@ class CreateSessionModal extends React.Component {
       sessionEndTime: "",
       sessionOvertime: "off",
       sessionSlug: "",
-      parentEvent: this.props.parentEvent,
     };
   }
 
@@ -25,7 +24,14 @@ class CreateSessionModal extends React.Component {
   //   function to submit the form and perform login mechanism
   handleSubmit = (event) => {
     event.preventDefault();
-    CreateSession(this.state)
+    CreateSession({
+      sessionName: this.state.sessionName,
+      sessionStartTime: this.state.sessionStartTime,
+      sessionEndTime: this.state.sessionEndTime,
+      sessionOvertime: this.state.sessionOvertime,
+      sessionSlug: this.state.sessionSlug,
+      parentEvent: this.props.parentEvent,
+    })
       .then((resp) => {
         //   when successfully created element, update app state with new element
         this.props.newSessionUpdater(resp.payload);
