@@ -2,7 +2,7 @@ import React from "react";
 
 // load dependents
 import EventListItem from "./eventListItem";
-import EventDetailsCreateButton from "./eventDetailsCreateButton";
+import EventListCreateButton from "./eventListCreateButton";
 
 class EventCardList extends React.Component {
   render() {
@@ -25,11 +25,9 @@ class EventCardList extends React.Component {
               />
             ))}
           </ul>
-          <EventDetailsCreateButton
-            newEventUpdater={this.props.newEventUpdater}
-          >
+          <EventListCreateButton newEventUpdater={this.props.newEventUpdater}>
             Create New Event
-          </EventDetailsCreateButton>
+          </EventListCreateButton>
         </div>
       </div>
     );

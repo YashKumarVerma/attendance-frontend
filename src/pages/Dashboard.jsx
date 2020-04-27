@@ -2,10 +2,9 @@ import React from "react";
 
 // importing components
 import NavBar from "../components/navbar";
-import EventListItem from "../components/Dashboard/eventListItem";
 import EventDetailsCard from "../components/Dashboard/eventDetails";
 import EventListCard from "../components/Dashboard/eventList";
-import CreateEventButton from "../components/Dashboard/eventDetailsCreateButton";
+import SessionListCard from "../components/Dashboard/sessionList";
 
 // loading scripts
 import { getUserEvents } from "../scripts/requests";
@@ -18,6 +17,7 @@ class Dashboard extends React.Component {
     this.state = {
       userEvents: [],
       activeEvent: undefined,
+      eventSessions: [],
       activeSession: undefined,
     };
 
@@ -60,6 +60,10 @@ class Dashboard extends React.Component {
     console.log(event.slug, "is active now");
   };
 
+  newSessionUpdater = (session) => {
+    console.log("Updaint Parents");
+  };
+
   render() {
     return (
       <div>
@@ -88,21 +92,11 @@ class Dashboard extends React.Component {
             <div className="col-md-4 col-sm-12">
               {/**	Show the sessions area only if user clicks on any event  */}
               {this.state.activeEvent ? (
-                <div className="card ">
-                  <div className="card-body">
-                    <h5 className="card-title">Event Sessions</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">
-                      in {this.state.activeEvent.eventName}
-                    </h6>
-                    <p className="card-text"></p>
-                    <button
-                      href="#"
-                      className="card-link btn btn-outline-primary"
-                    >
-                      F
-                    </button>
-                  </div>
-                </div>
+                <SessionListCard
+                  activeEvent={this.state.activeEvent}
+                  eventSessions={this.state.eventSessions}
+                  newSessionUpdater={this.newSessionUpdater}
+                />
               ) : null}
             </div>
 
