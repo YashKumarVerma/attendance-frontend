@@ -9,6 +9,7 @@ class Session {
       sessionEndTime,
       sessionOvertime,
       sessionSlug,
+      parentEvent,
     } = param;
     return new Promise((resolve, reject) => {
       axios
@@ -21,6 +22,7 @@ class Session {
               endTime: sessionEndTime,
               startTime: sessionStartTime,
               sessionName: sessionName,
+              parent: parentEvent,
             },
           },
           {
@@ -38,6 +40,26 @@ class Session {
         });
     });
   }
+
+  static GetAllSessionsOfEvent(param) {
+    const { eventSlug } = param;
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${config.host}/event/${eventSlug}/sessions`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((resp) => {
+          // save the items in local storage
+          resolve(resp.data);
+        })
+        .catch((error) => {
+          reject(error.response.data);
+        });
+    });
+  }
 }
 
 export const CreateSession = Session.create;
+export const GetAllSessionsOfEvent = Session.GetAllSessionsOfEvent;

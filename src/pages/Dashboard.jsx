@@ -4,7 +4,7 @@ import React from "react";
 import NavBar from "../components/navbar";
 import EventDetailsCard from "../components/Dashboard/eventDetails";
 import EventListCard from "../components/Dashboard/eventList";
-import SessionListCard from "../components/Dashboard/sessionList";
+import SessionListCard from "../components/Dashboard/sessionListCard";
 
 // loading scripts
 import { getUserEvents } from "../scripts/requests";
@@ -17,13 +17,15 @@ class Dashboard extends React.Component {
     this.state = {
       userEvents: [],
       activeEvent: undefined,
-      eventSessions: [],
       activeSession: undefined,
     };
 
     // bind eventUpdater to current state instance
     this.newEventUpdater = this.newEventUpdater.bind(this);
     this.deleteElement = this.deleteElement.bind(this);
+    this.makeEventActive = this.makeEventActive.bind(this);
+    this.newSessionUpdater = this.newSessionUpdater.bind(this);
+    this.makeSessionActive = this.makeSessionActive.bind(this);
   }
 
   // load list of all events when component loads
@@ -56,12 +58,24 @@ class Dashboard extends React.Component {
 
   //   function to make event active when clicked upon
   makeEventActive = (event) => {
-    this.setState({ activeEvent: event });
+    this.setState({
+      activeEvent: event,
+      activeSession: undefined,
+    });
+
     console.log(event.slug, "is active now");
   };
 
-  newSessionUpdater = (session) => {
-    this.setState({ eventSessions: this.state.eventSessions.concat(session) });
+  makeSessionActive = (session) => {
+    console.log("Making Session Active");
+    // console.log(session);
+  };
+
+  newSessionUpdater = (sessions) => {
+    //   if array of sessions passed, when initial data fed,
+    console.log(sessions);
+    // update the state
+    console.log("Updated ActiveEvent State");
   };
 
   render() {
@@ -94,8 +108,8 @@ class Dashboard extends React.Component {
               {this.state.activeEvent ? (
                 <SessionListCard
                   activeEvent={this.state.activeEvent}
-                  eventSessions={this.state.eventSessions}
                   newSessionUpdater={this.newSessionUpdater}
+                  makeSessionActive={this.makeSessionActive}
                 />
               ) : null}
             </div>

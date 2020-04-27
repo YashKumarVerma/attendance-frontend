@@ -12,6 +12,7 @@ class CreateSessionModal extends React.Component {
       sessionEndTime: "",
       sessionOvertime: "off",
       sessionSlug: "",
+      parentEvent: this.props.parentEvent,
     };
   }
 
@@ -28,6 +29,7 @@ class CreateSessionModal extends React.Component {
       .then((resp) => {
         //   when successfully created element, update app state with new element
         this.props.newSessionUpdater(resp.payload);
+
         console.log(`New Session: ${this.state.sessionSlug}  Created`);
 
         // reset state
@@ -35,10 +37,8 @@ class CreateSessionModal extends React.Component {
           sessionName: "",
           sessionStartTime: "",
           sessionEndTime: "",
-          sessionOvertime: "",
+          sessionOvertime: "off",
           sessionSlug: "",
-          error: false,
-          errorMessage: "",
         });
 
         // close the modal
@@ -90,6 +90,7 @@ class CreateSessionModal extends React.Component {
                     placeholder="Enter name of session"
                     type="text"
                     name="sessionName"
+                    value={this.state.sessionName}
                     onChange={this.handleChange}
                     required
                   />
@@ -98,6 +99,7 @@ class CreateSessionModal extends React.Component {
                     placeholder="a unique, all small, readable, dash separated string for session "
                     type="text"
                     name="sessionSlug"
+                    value={this.state.sessionSlug}
                     onChange={this.handleChange}
                     required
                   />
@@ -107,6 +109,7 @@ class CreateSessionModal extends React.Component {
                     placeholder="starting timestamp when attendance should start"
                     type="datetime-local"
                     name="sessionStartTime"
+                    value={this.state.sessionStartTime}
                     onChange={this.handleChange}
                     required
                   />
@@ -116,6 +119,7 @@ class CreateSessionModal extends React.Component {
                     placeholder="ending timestamp when attendance should stop"
                     type="datetime-local"
                     name="sessionEndTime"
+                    value={this.state.sessionEndTime}
                     onChange={this.handleChange}
                     required
                   />
@@ -125,6 +129,7 @@ class CreateSessionModal extends React.Component {
                     placeholder="whether to allow participants to log in after time"
                     type="checkbox"
                     name="sessionOvertime"
+                    value={this.state.sessionOvertime}
                     onChange={this.handleChange}
                   />
                 </div>
@@ -137,16 +142,11 @@ class CreateSessionModal extends React.Component {
                     Close
                   </button>
                   <button type="submit" className="btn btn-primary">
-                    Save Event
+                    Save Session
                   </button>
                 </div>
               </div>
             </div>
-            {this.state.error ? (
-              <div className="alert alert-danger" role="alert">
-                {this.state.errorMessage}
-              </div>
-            ) : null}
           </form>
         </div>
       </div>
