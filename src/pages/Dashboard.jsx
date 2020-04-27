@@ -17,15 +17,12 @@ class Dashboard extends React.Component {
     this.state = {
       userEvents: [],
       activeEvent: undefined,
-      activeSession: undefined,
     };
 
     // bind eventUpdater to current state instance
     this.newEventUpdater = this.newEventUpdater.bind(this);
     this.deleteElement = this.deleteElement.bind(this);
     this.makeEventActive = this.makeEventActive.bind(this);
-    this.newSessionUpdater = this.newSessionUpdater.bind(this);
-    this.makeSessionActive = this.makeSessionActive.bind(this);
   }
 
   // load list of all events when component loads
@@ -51,7 +48,6 @@ class Dashboard extends React.Component {
 
     this.setState({
       activeEvent: undefined,
-      activeSession: undefined,
       userEvents: newEvents,
     });
   };
@@ -64,18 +60,6 @@ class Dashboard extends React.Component {
     });
 
     console.log(event.slug, "is active now");
-  };
-
-  makeSessionActive = (session) => {
-    console.log("Making Session Active");
-    // console.log(session);
-  };
-
-  newSessionUpdater = (sessions) => {
-    //   if array of sessions passed, when initial data fed,
-    console.log(sessions);
-    // update the state
-    console.log("Updated ActiveEvent State");
   };
 
   render() {
@@ -106,11 +90,7 @@ class Dashboard extends React.Component {
             <div className="col-md-4 col-sm-12">
               {/**	Show the sessions area only if user clicks on any event  */}
               {this.state.activeEvent ? (
-                <SessionListCard
-                  activeEvent={this.state.activeEvent}
-                  newSessionUpdater={this.newSessionUpdater}
-                  makeSessionActive={this.makeSessionActive}
-                />
+                <SessionListCard activeEvent={this.state.activeEvent} />
               ) : null}
             </div>
 

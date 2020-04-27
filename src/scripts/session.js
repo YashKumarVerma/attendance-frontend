@@ -3,6 +3,7 @@ import config from "./config";
 
 class Session {
   static create(param) {
+    console.log("Showing CreateSession Params", param);
     const {
       sessionName,
       sessionStartTime,
@@ -22,7 +23,7 @@ class Session {
               endTime: sessionEndTime,
               startTime: sessionStartTime,
               sessionName: sessionName,
-              parent: parentEvent,
+              parent: parentEvent.slug,
             },
           },
           {
@@ -41,8 +42,7 @@ class Session {
     });
   }
 
-  static GetAllSessionsOfEvent(param) {
-    const { eventSlug } = param;
+  static GetAllSessionsOfEvent(eventSlug) {
     return new Promise((resolve, reject) => {
       axios
         .get(`${config.host}/event/${eventSlug}/sessions`, {
