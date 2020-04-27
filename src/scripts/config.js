@@ -3,3 +3,5 @@ const config = {
 };
 
 export default config;
+
+export const DateTimeFormat = "dddd, MMMM Do YYYY, h:mm:ss a";
