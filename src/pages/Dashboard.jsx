@@ -61,7 +61,7 @@ class Dashboard extends React.Component {
   };
 
   newSessionUpdater = (session) => {
-    console.log("Updaint Parents");
+    this.setState({ eventSessions: this.state.eventSessions.concat(session) });
   };
 
   render() {

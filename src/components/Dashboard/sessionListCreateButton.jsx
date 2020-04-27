@@ -27,9 +27,7 @@ class CreateSessionModal extends React.Component {
     CreateSession(this.state)
       .then((resp) => {
         //   when successfully created element, update app state with new element
-        this.props.newSessionUpdater({
-          ...this.state,
-        });
+        this.props.newSessionUpdater(resp.payload);
         console.log(`New Session: ${this.state.sessionSlug}  Created`);
 
         // reset state
@@ -43,15 +41,12 @@ class CreateSessionModal extends React.Component {
           errorMessage: "",
         });
 
-        // update parent state with response
-        console.log(resp);
-
         // close the modal
         window.$("#createSessionModal").modal("hide");
       })
       .catch((error) => {
-        alert(error.message);
         this.setState({ errorMessage: error.message });
+        alert(error.message);
       });
   };
 
