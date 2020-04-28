@@ -21,3 +21,16 @@
 body {
   margin-bottom: 20px;
 }
+
+.session-card-button {
+  width: 46%;
+  margin: 0% 2%;
+}
+
+.participant-count-badge {
+  display: inline-block;
+  position: absolute;
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  right: 1.6em;
+}

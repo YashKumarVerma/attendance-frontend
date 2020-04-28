@@ -15,6 +15,9 @@ class SessionListCard extends React.Component {
 
     // binding functions to state
     this.handleNewSessionReport = this.handleNewSessionReport.bind(this);
+    this.handleSessionDeletionReport = this.handleSessionDeletionReport.bind(
+      this
+    );
   }
 
   // when component loads initially, populate with active events events
@@ -56,6 +59,11 @@ class SessionListCard extends React.Component {
   handleNewSessionReport = (param) => {
     console.log("Updating current state with newly created session", param);
     this.setState({ sessions: [...this.state.sessions, param] });
+  };
+
+  //   function to handle callback communication relating got session deletion
+  handleSessionDeletionReport = (param) => {
+    console.log("Updating current state after deleting session", param);
   };
 }
 
