@@ -59,7 +59,27 @@ class Session {
         });
     });
   }
+
+  //   this function is used to delete event
+  static delete(slug) {
+    return new Promise((resolve, reject) => {
+      axios
+        .delete(`${config.host}/session/${slug}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((resp) => {
+          // save the items in local storage
+          resolve(resp.data);
+        })
+        .catch((error) => {
+          reject(error.response.data);
+        });
+    });
+  }
 }
 
 export const CreateSession = Session.create;
 export const GetAllSessionsOfEvent = Session.GetAllSessionsOfEvent;
+export const DeleteSession = Session.delete;

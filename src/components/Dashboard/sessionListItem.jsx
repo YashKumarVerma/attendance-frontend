@@ -50,8 +50,8 @@ class SessionListItem extends React.Component {
                   {session.endTime}
                 </Moment>{" "}
                 <i> minutes</i>
-                <hr />
               </p>
+              <hr />
               <button className="btn btn-outline-primary session-card-button">
                 View Participants
               </button>

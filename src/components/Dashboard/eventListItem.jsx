@@ -15,7 +15,7 @@ class EventListItem extends React.Component {
       >
         {eventName}
         <span className="badge badge-primary badge-pill">
-          {sessions.length}
+          {/**Sessions : {sessions.length} */}
         </span>
       </li>
     );

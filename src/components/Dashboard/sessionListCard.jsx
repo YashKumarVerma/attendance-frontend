@@ -27,7 +27,7 @@ class SessionListCard extends React.Component {
     );
   }
 
-  componentDidUpdate() {
+  componentDidCatch() {
     GetAllSessionsOfEvent(this.props.activeEvent.slug).then((resp) =>
       this.setState({ sessions: [...resp.payload] })
     );
