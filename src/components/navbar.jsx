@@ -14,9 +14,6 @@ class navBar extends React.Component {
     console.log("Logging you out");
 
     // empty localstorage
-    localStorage.removeItem("username");
-    localStorage.removeItem("fullname");
-    localStorage.removeItem("profile");
     localStorage.removeItem("token");
 
     // now redirect to dashboard

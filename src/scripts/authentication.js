@@ -10,10 +10,8 @@ class Authentication {
         .post(`${config.host}/user/login`, { username, password })
         .then((resp) => {
           // save the items in local storage
-          localStorage.setItem("username", resp.data.payload.username);
-          localStorage.setItem("fullname", resp.data.payload.fullname);
-          localStorage.setItem("profile", resp.data.payload.profilePicture);
-          localStorage.setItem("token", resp.data.payload.token);
+          console.log(resp.data.payload);
+          localStorage.setItem("token", resp.data.payload);
 
           resolve({ error: false });
         })
