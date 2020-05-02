@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../components/navbar";
-import EventListCard from "../components/Dashboard/eventList.Card";
+import EventListCard from "../components/Dashboard/eventList/eventList.card";
 
 class Dashboard extends React.Component {
   render() {

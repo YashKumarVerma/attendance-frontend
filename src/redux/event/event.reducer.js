@@ -12,6 +12,17 @@ const EventReducer = (state = INITIAL_STATE, action) => {
     });
   }
 
+  if (action.type === EventActionTypes.SET_ACTIVE_EVENT) {
+    for (let i = 0; i < state.events.length; i += 1) {
+      if (state.events[i].slug === action.payload) {
+        return Object.assign({}, state, {
+          activeEvent: state.events[i],
+        });
+      }
+    }
+    return { ...state };
+  }
+
   return state;
   //   switch (action.type) {
   //     case EventActionTypes.ADD_EVENT: {

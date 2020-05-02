@@ -1,9 +1,8 @@
 import React from "react";
-import InputElement from "../InputElement";
-import { CreateEvent } from "../../scripts/event";
-
 import { connect } from "react-redux";
-import { addEvent } from "../../redux/event/event.action";
+import InputElement from "../../InputElement";
+import { CreateEvent } from "../../../scripts/event";
+import { addEvent } from "../../../redux/event/event.action";
 
 class CreateEventButton extends React.Component {
   constructor(props) {

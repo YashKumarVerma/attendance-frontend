@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 // load dependents
-// import EventListItem from "./eventListItem";
-import CreateNewEventButton from "./eventList.CreateNewEventButton";
+import EventListItems from "./eventList.items";
+import CreateNewEventButton from "./eventList.createButton";
 
 const EventListCard = ({ events }) => (
   <div className="card  bg-light">
@@ -15,12 +15,7 @@ const EventListCard = ({ events }) => (
       </h6>
       <small>click to know more</small>
       <ul className="list-group">
-        Event List Items here
-        {/**<EventListItem
-            event={userEvent}
-            makeEventActive={this.props.makeEventActive}
-            key={userEvent._id}
-          /> */}
+        <EventListItems />
       </ul>
       <CreateNewEventButton>Create New Event</CreateNewEventButton>
     </div>
