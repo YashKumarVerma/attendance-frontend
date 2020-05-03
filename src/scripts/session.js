@@ -20,24 +20,6 @@ class Session {
     }
   }
 
-  static GetAllSessionsOfEvent(eventSlug) {
-    return new Promise((resolve, reject) => {
-      axios
-        .get(`${config.host}/event/${eventSlug}/sessions`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then((resp) => {
-          // save the items in local storage
-          resolve(resp.data);
-        })
-        .catch((error) => {
-          reject(error.response.data);
-        });
-    });
-  }
-
   //   this function is used to delete event
   static delete(slug) {
     return new Promise((resolve, reject) => {
@@ -59,5 +41,4 @@ class Session {
 }
 
 export const CreateSession = Session.CreateSession;
-export const GetAllSessionsOfEvent = Session.GetAllSessionsOfEvent;
 export const DeleteSession = Session.delete;
