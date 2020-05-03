@@ -21,22 +21,18 @@ class Session {
   }
 
   //   this function is used to delete event
-  static delete(slug) {
-    return new Promise((resolve, reject) => {
-      axios
-        .delete(`${config.host}/session/${slug}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then((resp) => {
-          // save the items in local storage
-          resolve(resp.data);
-        })
-        .catch((error) => {
-          reject(error.response.data);
-        });
-    });
+  static async delete(param) {
+    try {
+      const response = await axios.delete(`${config.host}/session/delete`, {
+        data: param,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      return response.data.payload;
+    } catch (err) {
+      return err.response;
+    }
   }
 }
 
