@@ -7,7 +7,6 @@ import CreateNewEventButton from "./eventList.createButton";
 
 const EventListCard = ({ events }) => (
   <div className="card  bg-light">
-    {console.log("Listening to events here :", events)}
     <div className="card-body">
       <h5 className="card-title">Events</h5>
       <h6 className="card-subtitle mb-2 text-muted">
@@ -28,5 +27,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const fuck = connect(mapStateToProps)(EventListCard);
-export default fuck;
+export default connect(mapStateToProps)(EventListCard);
