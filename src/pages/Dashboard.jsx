@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../components/navbar";
 import EventListCard from "../components/Dashboard/eventList/eventList.card";
-
+import ActiveEventDetailsCard from "../components/Dashboard/eventList/eventList.activeSessionCard";
 import { connect } from "react-redux";
 import { InitialLoad } from "../scripts/event";
 import { addEvent } from "../redux/event/event.action";
@@ -24,13 +24,11 @@ class Dashboard extends React.Component {
           <div className="row">
             <div className="col-md-4 col-sm-12">
               <EventListCard />
+              <ActiveEventDetailsCard />
             </div>
-            {/**
-            <div className="col-md-4 col-sm-12">Session List Card</div>
 
-				<div className="col-md-4 col-sm-12">Session List Card</div>
-			*/}
-            {/**<div className="col-md-4 col-sm-12">
+            <div className="col-md-4 col-sm-12">Session List Card</div>
+            <div className="col-md-4 col-sm-12">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Event Sessions</h5>
@@ -46,7 +44,7 @@ class Dashboard extends React.Component {
                   </button>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

@@ -5,6 +5,11 @@ export const addEvent = (payload) => ({
   payload: payload,
 });
 
+export const deleteEvent = (payload) => ({
+  type: EventActionTypes.DELETE_EVENT,
+  payload: payload,
+});
+
 export const setActiveEvent = (payload) => ({
   type: EventActionTypes.SET_ACTIVE_EVENT,
   payload: payload,
