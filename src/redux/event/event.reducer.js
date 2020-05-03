@@ -14,7 +14,6 @@ const EventReducer = (state = INITIAL_STATE, action) => {
       });
     }
 
-    // handle event selection
     case EventActionTypes.SET_ACTIVE_EVENT: {
       for (let i = 0; i < state.events.length; i += 1) {
         if (state.events[i].slug === action.payload) {
@@ -52,9 +51,40 @@ const EventReducer = (state = INITIAL_STATE, action) => {
       });
     }
 
-    // case EventActionTypes.DELETE_EVENT: {
-    //   return { ...state };
-    // }
+    case EventActionTypes.DELETE_SESSION: {
+      console.log("Reducer -> DeleteSession -> Params", action.payload);
+      const { slug, parent } = action.payload;
+
+      const newEventsArray = [];
+      //   loop through all the events
+      for (let i = 0; i < state.events.length; i++) {
+        // if we find the event from which session is deleted,
+        if (state.events[i].slug === parent) {
+          // first remove the sessionSlug from event.sessions
+          newEventsArray.push({
+            _id: state.events[i]._id,
+            eventName: state.events[i].eventName,
+            slug: state.events[i].slug,
+            description: state.events[i].description,
+            participants: state.events[i].participants,
+            admin: state.events[i].admin,
+            sessions: state.events[i].sessions.filter(
+              (sessionSlug) => sessionSlug !== slug
+            ),
+            sessionDetails: state.events[i].sessionDetails.filter(
+              (sessionEntry) => sessionEntry.slug !== slug
+            ),
+          });
+        }
+        // else simply append it for the new state object
+        else {
+          newEventsArray.push(state.events[i]);
+        }
+      }
+      return Object.assign({}, state, {
+        events: [...newEventsArray],
+      });
+    }
 
     default:
       return state;

@@ -3,8 +3,11 @@ import Moment from "react-moment";
 import { connect } from "react-redux";
 import { DateTimeFormat } from "../../../scripts/config";
 import { DeleteSession } from "../../../scripts/session";
-// load dependents
 import CreateSessionButton from "./sessionList.createButton";
+import {
+  deleteSession,
+  setActiveEvent,
+} from "../../../redux/event/event.action";
 
 class SessionListCard extends React.Component {
   async handleDeleteClick(sessionToDelete) {
@@ -15,7 +18,8 @@ class SessionListCard extends React.Component {
       };
 
       const response = await DeleteSession({ session: sessionDetails });
-      console.log(response);
+      this.props.deleteSession(sessionDetails);
+      this.props.setActiveEvent(sessionDetails.parent);
     } catch (err) {
       console.log("Error while deleting session : ", err);
     }
@@ -93,4 +97,9 @@ const mapStateToProps = (state) => {
   return { activeEvent: state.activeEvent };
 };
 
-export default connect(mapStateToProps)(SessionListCard);
+const mapDispatchToProps = (dispatch) => ({
+  deleteSession: (session) => dispatch(deleteSession(session)),
+  setActiveEvent: (event) => dispatch(setActiveEvent(event)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SessionListCard);

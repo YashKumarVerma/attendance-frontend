@@ -3,6 +3,7 @@ const EventActionTypes = {
   DELETE_EVENT: "DELETE_EVENT",
   SET_ACTIVE_EVENT: "SET_ACTIVE_EVENT",
   ADD_SESSION: "ADD_SESSION",
+  DELETE_SESSION: "DELETE_SESSION",
 };
 
 export default EventActionTypes;

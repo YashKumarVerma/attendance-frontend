@@ -19,3 +19,8 @@ export const addSession = (payload) => ({
   type: EventActionTypes.ADD_SESSION,
   payload: payload,
 });
+
+export const deleteSession = (payload) => ({
+  type: EventActionTypes.DELETE_SESSION,
+  payload: payload,
+});
