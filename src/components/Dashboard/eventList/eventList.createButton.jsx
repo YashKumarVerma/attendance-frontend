@@ -38,7 +38,7 @@ class CreateEventButton extends React.Component {
       };
 
       const response = await CreateEvent(eventDetails);
-      this.props.addEvent(eventDetails);
+      this.props.addEvent(response);
       console.log("Successfully created new event :  ", response);
       window.$("#createEventModal").modal("hide");
 

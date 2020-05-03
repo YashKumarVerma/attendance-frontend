@@ -17,7 +17,7 @@ class Event {
           }
         )
         .then((resp) => {
-          resolve(resp.data);
+          resolve(resp.data.payload);
         })
         .catch((error) => {
           reject(error.response.data);
