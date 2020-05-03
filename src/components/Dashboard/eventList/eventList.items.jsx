@@ -14,7 +14,7 @@ class EventListItems extends React.Component {
           <li
             className="list-group-item d-flex justify-content-between align-items-center"
             key={event.slug}
-            onclick={() => {
+            onClick={() => {
               this.props.setActiveEvent(event.slug);
             }}
           >

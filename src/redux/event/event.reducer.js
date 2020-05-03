@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 const EventReducer = (state = INITIAL_STATE, action) => {
   if (action.type === EventActionTypes.ADD_EVENT) {
     return Object.assign({}, state, {
-      events: state.events.concat(action.payload),
+      events: state.events.concat(...action.payload),
     });
   }
 

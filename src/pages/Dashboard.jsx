@@ -2,7 +2,20 @@ import React from "react";
 import NavBar from "../components/navbar";
 import EventListCard from "../components/Dashboard/eventList/eventList.card";
 
+import { connect } from "react-redux";
+import { InitialLoad } from "../scripts/event";
+import { addEvent } from "../redux/event/event.action";
+
 class Dashboard extends React.Component {
+  componentDidMount() {
+    this.dataFeeder();
+  }
+
+  async dataFeeder() {
+    const initialDataFeed = await InitialLoad();
+    this.props.addEvent(initialDataFeed);
+  }
+
   render() {
     return (
       <div>
@@ -41,4 +54,8 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapDispatchToProps = (dispatch) => ({
+  addEvent: (events) => dispatch(addEvent(events)),
+});
+
+export default connect(null, mapDispatchToProps)(Dashboard);
