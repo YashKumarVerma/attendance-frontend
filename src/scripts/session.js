@@ -2,44 +2,22 @@ import axios from "axios";
 import config from "./config";
 
 class Session {
-  static create(param) {
-    console.log("Showing CreateSession Params", param);
-    const {
-      sessionName,
-      sessionStartTime,
-      sessionEndTime,
-      sessionOvertime,
-      sessionSlug,
-      parentEvent,
-    } = param;
-    return new Promise((resolve, reject) => {
-      axios
-        .post(
-          `${config.host}/session/create`,
-          {
-            session: {
-              slug: sessionSlug,
-              overtimePermission: sessionOvertime,
-              endTime: sessionEndTime,
-              startTime: sessionStartTime,
-              sessionName: sessionName,
-              parent: parentEvent.slug,
-            },
+  static async CreateSession(param) {
+    try {
+      const response = await axios.post(
+        `${config.host}/session/create`,
+        param,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then((resp) => {
-          // save the items in local storage
-          resolve(resp.data);
-        })
-        .catch((error) => {
-          reject(error.response.data);
-        });
-    });
+        }
+      );
+
+      return response.data.payload;
+    } catch (err) {
+      return err.response;
+    }
   }
 
   static GetAllSessionsOfEvent(eventSlug) {
@@ -80,6 +58,6 @@ class Session {
   }
 }
 
-export const CreateSession = Session.create;
+export const CreateSession = Session.CreateSession;
 export const GetAllSessionsOfEvent = Session.GetAllSessionsOfEvent;
 export const DeleteSession = Session.delete;

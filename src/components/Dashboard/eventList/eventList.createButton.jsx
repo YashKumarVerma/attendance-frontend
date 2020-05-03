@@ -1,8 +1,10 @@
 import React from "react";
-import InputElement from "../InputElement";
-import { CreateEvent } from "../../scripts/event";
+import { connect } from "react-redux";
+import InputElement from "../../InputElement";
+import { CreateEvent } from "../../../scripts/event";
+import { addEvent } from "../../../redux/event/event.action";
 
-class CreateEventModal extends React.Component {
+class CreateEventButton extends React.Component {
   constructor(props) {
     super(props);
 
@@ -13,45 +15,41 @@ class CreateEventModal extends React.Component {
       error: false,
       errorMessage: "",
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  //   function to update changes to state
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
-  //   function to submit the form and perform login mechanism
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    CreateEvent(this.state)
-      .then((resp) => {
-        //   when successfully created element, update app state with new element
-        this.props.newEventUpdater({
-          participants: [],
-          sessions: [],
-          picture: "http://via.placeholder.com/150",
-          eventName: this.state.eventName,
-          slug: this.state.eventSlug,
-          admin: localStorage.getItem("username"),
-          description: this.state.eventDescription,
-        });
-        console.log("New Event Created");
 
-        // reset state
-        this.setState({
-          eventName: "",
-          eventSlug: "",
-          eventDescription: "",
-        });
+    try {
+      const eventDetails = {
+        eventName: this.state.eventName,
+        slug: this.state.eventSlug,
+        description: this.state.eventDescription,
+        participants: [],
+        sessions: [],
+      };
 
-        // close the modal
-        window.$("#createEventModal").modal("hide");
-      })
-      .catch((error) => {
-        alert(error.message);
-        this.setState({ errorMessage: error.message });
+      const response = await CreateEvent(eventDetails);
+      this.props.addEvent(response);
+      console.log("Successfully created new event :  ", response);
+      window.$("#createEventModal").modal("hide");
+
+      this.setState({
+        eventName: "",
+        eventSlug: "",
+        eventDescription: "",
       });
+    } catch (err) {
+      console.log("Error while creating new event", err);
+    }
   };
 
   render() {
@@ -128,11 +126,6 @@ class CreateEventModal extends React.Component {
                 </div>
               </div>
             </div>
-            {this.state.error ? (
-              <div className="alert alert-danger" role="alert">
-                {this.state.errorMessage}
-              </div>
-            ) : null}
           </form>
         </div>
       </div>
@@ -140,4 +133,8 @@ class CreateEventModal extends React.Component {
   }
 }
 
-export default CreateEventModal;
+const mapDispatchToProps = (dispatch) => ({
+  addEvent: (event) => dispatch(addEvent(event)),
+});
+
+export default connect(null, mapDispatchToProps)(CreateEventButton);
