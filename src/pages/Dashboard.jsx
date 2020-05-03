@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "../components/navbar";
 import EventListCard from "../components/Dashboard/eventList/eventList.card";
 import ActiveEventDetailsCard from "../components/Dashboard/eventList/eventList.activeSessionCard";
+import SessionsListCard from "../components/Dashboard/sessionList/sessionList.card";
 import { connect } from "react-redux";
 import { InitialLoad } from "../scripts/event";
 import { addEvent } from "../redux/event/event.action";
@@ -27,7 +28,10 @@ class Dashboard extends React.Component {
               <ActiveEventDetailsCard />
             </div>
 
-            <div className="col-md-4 col-sm-12">Session List Card</div>
+            <div className="col-md-4 col-sm-12">
+              <SessionsListCard />
+            </div>
+
             <div className="col-md-4 col-sm-12">
               <div className="card">
                 <div className="card-body">
