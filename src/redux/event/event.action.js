@@ -14,3 +14,8 @@ export const setActiveEvent = (payload) => ({
   type: EventActionTypes.SET_ACTIVE_EVENT,
   payload: payload,
 });
+
+export const addSession = (payload) => ({
+  type: EventActionTypes.ADD_SESSION,
+  payload: payload,
+});
