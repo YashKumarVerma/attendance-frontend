@@ -50,13 +50,15 @@ class navBar extends React.Component {
         <div className="collapse navbar-collapse" id="navbarExpansion">
           <ul className="navbar-nav mr-auto"></ul>
           <form className="form-inline my-2 my-md-0">
-            <button
-              className="btn btn-outline-danger"
-              type="button"
-              onClick={this.handleLogout}
-            >
-              Logout
-            </button>
+            {this.props.isLoggedIn ? (
+              <button
+                className="btn btn-outline-danger"
+                type="button"
+                onClick={this.handleLogout}
+              >
+                Logout
+              </button>
+            ) : null}
           </form>
         </div>
       </nav>
