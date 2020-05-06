@@ -1,5 +1,5 @@
 const config = {
-  host: "http://localhost:3000",
+  host: "https://acmvit-attendance-backend.now.sh",
 };
 
 export default config;
