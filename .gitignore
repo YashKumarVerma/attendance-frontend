@@ -29,3 +29,4 @@ yarn-error.log*
 
 # ignore config
 ./src/scripts/config.js
+todo.md

@@ -1,7 +1,5 @@
 # Attendance Application : Frontend
 
-[![Build Status](https://travis-ci.com/yashkumarverma/attendance-frontend.svg?branch=master)](https://travis-ci.com/yashkumarverma/attendance-frontend)
-
 ## Building and Running
 
 ```
@@ -10,7 +8,7 @@ $ npm run build
 $ npm run server
 ```
 
-[Visit the test version here ](https://acmvit-attendance.web.app/)
+[Visit the Test version here ](https://acmvit-attendance.web.app/)
 
 ## Docs
 
