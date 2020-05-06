@@ -1,5 +1,5 @@
 const config = {
-  host: "https://acmvit-attendance-backend.now.sh",
+  host: "https://acm-attendance-backend.azurewebsites.net/",
 };
 
 export default config;
