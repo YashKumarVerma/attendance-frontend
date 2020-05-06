@@ -13,7 +13,36 @@ const SessionDetailsCard = ({ activeSession }) => (
             listing details of session
           </h6>
           <small>click to know more</small>
-          <ul className="list-group"></ul>
+          <ul className="list-group">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Rishabh Keshan
+              <span className="badge badge-success badge-pill">In Time</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Rohan Arora
+              <span className="badge badge-warning badge-pill">Late</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Kashish Mittal
+              <span className="badge badge-danger badge-pill">Absent</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Eesha Shetty
+              <span className="badge badge-warning badge-pill">Late</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Shovin Kakaraddi
+              <span className="badge badge-danger badge-pill">Absent</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Elio Jordan Lopes
+              <span className="badge badge-success badge-pill">In Time</span>
+            </li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Rithvik Ayithapu
+              <span className="badge badge-success badge-pill">In Time</span>
+            </li>
+          </ul>
         </div>
       </div>
     ) : null}
