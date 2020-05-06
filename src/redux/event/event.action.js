@@ -24,3 +24,8 @@ export const deleteSession = (payload) => ({
   type: EventActionTypes.DELETE_SESSION,
   payload: payload,
 });
+
+export const setActiveSession = (payload) => ({
+  type: EventActionTypes.SET_ACTIVE_SESSION,
+  payload: payload,
+});

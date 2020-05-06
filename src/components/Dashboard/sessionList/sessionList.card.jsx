@@ -7,6 +7,7 @@ import CreateSessionButton from "./sessionList.createButton";
 import {
   deleteSession,
   setActiveEvent,
+  setActiveSession,
 } from "../../../redux/event/event.action";
 
 class SessionListCard extends React.Component {
@@ -70,7 +71,10 @@ class SessionListCard extends React.Component {
                       <i> minutes</i>
                     </p>
                     <hr />
-                    <button className="btn btn-outline-primary session-card-button">
+                    <button
+                      className="btn btn-outline-primary session-card-button"
+                      onClick={() => this.props.setActiveSession(session.slug)}
+                    >
                       View Participants
                     </button>
                     <button
@@ -100,6 +104,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   deleteSession: (session) => dispatch(deleteSession(session)),
   setActiveEvent: (event) => dispatch(setActiveEvent(event)),
+  setActiveSession: (sessionSlug) => dispatch(setActiveSession(sessionSlug)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SessionListCard);

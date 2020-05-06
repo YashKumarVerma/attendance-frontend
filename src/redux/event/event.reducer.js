@@ -3,6 +3,7 @@ import EventActionTypes from "./event.types";
 const INITIAL_STATE = {
   events: [],
   activeEvent: null,
+  activeSession: null,
 };
 
 const EventReducer = (state = INITIAL_STATE, action) => {
@@ -84,6 +85,18 @@ const EventReducer = (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, {
         events: [...newEventsArray],
       });
+    }
+
+    case EventActionTypes.SET_ACTIVE_SESSION: {
+      console.log("Setting active session : ", action.payload);
+      for (let i = 0; i < state.activeEvent.sessionDetails.length; i += 1) {
+        if (state.activeEvent.sessionDetails[i].slug === action.payload) {
+          return Object.assign({}, state, {
+            activeSession: state.activeEvent.sessionDetails[i],
+          });
+        }
+      }
+      return { ...state };
     }
 
     default:
